@@ -1,0 +1,2 @@
+include 'org.xtext.projection'
+include 'org.xtext.projection.ide'

@@ -1,0 +1,9 @@
+grammar org.xtext.projection.Projection with org.eclipse.xtext.common.Terminals
+
+generate projection "http://www.xtext.org/projection/Projection"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';

@@ -1,0 +1,20 @@
+plugins {
+	id 'com.github.johnrengelman.shadow' version '2.0.0'
+}
+
+dependencies {
+	compile project(':org.xtext.projection')
+	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+}
+
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
+
+shadowJar {
+    baseName = 'projection-language-server'
+    classifier = null
+    version = null
+
+}

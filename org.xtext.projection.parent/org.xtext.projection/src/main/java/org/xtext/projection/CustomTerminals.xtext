@@ -1,0 +1,77 @@
+grammar org.xtext.projection.CustomTerminals with org.eclipse.xtext.common.Terminals hidden (LINE_COMMENT, LINE_COMMENT2, /*BLOCK_COMMENT,*/ ALERT_LINE_COMMENT, 
+	QUESTION_LINE_COMMENT, GOOD_LINE_COMMENT, REGION_COMMENT, ML_COMMENT, SL_COMMENT, WS)
+
+generate customTerminals "http://www.xtext.org/projection/CustomTerminals"
+
+Rule:
+	(rules+=Terminal)*
+;
+
+Terminal:
+	TIME | CAMELCASE_IDENTIFIER | DECIMAL
+;
+
+@Override 
+terminal ML_COMMENT : '/*' -> '*/';
+
+@Override 
+terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+@Override 
+terminal WS         : (' '|'\t'|'\r'|'\n')+;
+
+terminal LINE_COMMENT
+   : ( '--' !('\r'|'\n')* )  
+ 
+   ;
+
+terminal LINE_COMMENT2
+   : ( '//' !('!'|'?'|'='|'\r'|'\n')? !('\r'|'\n')* )  
+ 
+   ;
+
+//BLOCK_COMMENT is not required since ML_COMMENT is already defined
+//terminal BLOCK_COMMENT
+//   : '/*' .* '*/'  
+//   ;
+
+terminal ALERT_LINE_COMMENT
+   : ( '//!' !('\r'|'\n')* )  
+ 
+   ;
+
+terminal QUESTION_LINE_COMMENT
+   : ( '//?' ('\r'|'\n')* )  
+ 
+   ;
+
+terminal GOOD_LINE_COMMENT
+   : ( '//=' !('\r'|'\n')* )  
+ 
+   ;
+
+terminal REGION_COMMENT
+   : ( '---' ('-')+ (' ') (('A'..'Z'|'0'..'9')+ (' '))+ ('-')+ )
+   ;
+
+terminal TIME
+   : ( ('0'..'9')+ ':' ('0'..'9')+ )
+   ;
+
+terminal CAMELCASE_IDENTIFIER
+   : ('a'..'z') ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'$'|'#')*
+   ;
+
+terminal DECIMAL
+   : ( ('0'..'9')+ '.' ('0'..'9')+ )
+   ;
+
+terminal CHARACTER
+   : ('\'') !('\'') ('\'')
+ 
+   ;
+   
+fragment
+QUOT
+   : '"'
+   ;

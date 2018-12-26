@@ -1,0 +1,30 @@
+grammar org.xtext.projection.Projection with org.eclipse.xtext.common.Terminals
+
+generate projection "http://www.xtext.org/projection/Projection"
+
+Model:
+	elements+=Element*;
+	
+Element:
+	MyText | MyInt | MyDecimal | MyId | MyTime
+;
+
+MyText:
+	'Hi' name=STRING
+;
+
+MyInt:
+	'Integer:' int=INT
+;
+
+MyDecimal:
+	'Decimal:' dec=DECIMAL
+;
+
+MyId:
+	'ID:' id=ID
+;
+
+MyTime:
+	'Time:' time=TIME
+;
